@@ -40,6 +40,11 @@ iwr -useb https://raw.githubusercontent.com/JohanBellander/prism/master/install.
 curl -fsSL https://raw.githubusercontent.com/JohanBellander/prism/master/install.cmd -o %TEMP%\prism-install.cmd && %TEMP%\prism-install.cmd
 ```
 
+*Note: After installation, you may need to restart your terminal or run:*
+```cmd
+set PATH=%PATH%;%LOCALAPPDATA%\prism\bin
+```
+
 **From source:**
 
 Requires Go 1.19 or later:

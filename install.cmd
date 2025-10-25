@@ -46,19 +46,35 @@ if errorlevel 1 (
 
 move /Y %BINARY_NAME% "%INSTALL_DIR%\"
 
-REM Add to PATH
+REM Add to PATH if not already there
 echo Checking PATH...
 echo %PATH% | findstr /C:"%INSTALL_DIR%" >nul
 if errorlevel 1 (
     echo Adding to PATH...
-    setx PATH "%PATH%;%INSTALL_DIR%" >nul
-    set PATH=%PATH%;%INSTALL_DIR%
+    REM Use PowerShell to add to user PATH to avoid setx 1024 char limit
+    powershell -Command "$currentPath = [Environment]::GetEnvironmentVariable('Path', 'User'); if ($currentPath -notlike '*%INSTALL_DIR%*') { [Environment]::SetEnvironmentVariable('Path', $currentPath + ';%INSTALL_DIR%', 'User') }" >nul 2>&1
+    if errorlevel 1 (
+        echo.
+        echo [33mWARNING: Could not automatically add to PATH.[0m
+        echo Please manually add this to your PATH:
+        echo   %INSTALL_DIR%
+        echo.
+        echo Or run this command:
+        echo   setx PATH "%%PATH%%;%INSTALL_DIR%"
+        echo.
+    ) else (
+        REM Update current session PATH
+        set PATH=%PATH%;%INSTALL_DIR%
+    )
 )
 
 echo.
 echo [32mPRISM installed successfully to %INSTALL_DIR%\%BINARY_NAME%[0m
 echo.
-echo Restart your command prompt for PATH changes to take effect.
+echo To use PRISM in this session, run:
+echo   set PATH=%%PATH%%;%INSTALL_DIR%
+echo.
+echo Or restart your command prompt.
 echo.
 echo Run 'prism --help' to get started!
 
