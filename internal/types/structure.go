@@ -59,12 +59,23 @@ type Component struct {
 
 // ComponentLayout defines layout properties for a component
 type ComponentLayout struct {
-	Display    string `json:"display"`              // "flex", "block", "grid"
-	Direction  string `json:"direction,omitempty"`  // "horizontal", "vertical"
-	Padding    int    `json:"padding,omitempty"`    // padding in pixels
-	Background string `json:"background,omitempty"` // hex color
-	Border     string `json:"border,omitempty"`     // e.g., "1px solid #E5E5E5"
-	Gap        int    `json:"gap,omitempty"`        // gap in pixels
+	Display             string `json:"display"`                        // "flex", "block", "grid"
+	Direction           string `json:"direction,omitempty"`            // "horizontal", "vertical"
+	Padding             int    `json:"padding,omitempty"`              // padding in pixels
+	Background          string `json:"background,omitempty"`           // hex color
+	Border              string `json:"border,omitempty"`               // e.g., "1px solid #E5E5E5"
+	BorderBottom        string `json:"border_bottom,omitempty"`        // e.g., "1px solid #E5E5E5"
+	BorderRight         string `json:"border_right,omitempty"`         // e.g., "1px solid #E5E5E5"
+	Gap                 int    `json:"gap,omitempty"`                  // gap in pixels
+	GridTemplateColumns string `json:"grid_template_columns,omitempty"` // e.g., "repeat(4, 1fr)"
+	Width               int    `json:"width,omitempty"`                // width in pixels
+	Height              int    `json:"height,omitempty"`               // height in pixels
+	MinHeight           string `json:"min_height,omitempty"`           // e.g., "calc(100vh - 64px)"
+	MaxWidth            int    `json:"max_width,omitempty"`            // max width in pixels
+	Flex                int    `json:"flex,omitempty"`                 // flex grow factor
+	JustifyContent      string `json:"justify_content,omitempty"`      // "flex-start", "center", "space-between"
+	AlignItems          string `json:"align_items,omitempty"`          // "flex-start", "center", "flex-end"
+	MarginBottom        int    `json:"margin_bottom,omitempty"`        // margin bottom in pixels
 }
 
 // Responsive defines responsive breakpoints and changes

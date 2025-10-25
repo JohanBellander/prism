@@ -7,6 +7,7 @@ import (
 	"image/draw"
 	"image/png"
 	"os"
+	"strings"
 
 	"github.com/johanbellander/prism/internal/types"
 	"golang.org/x/image/font"
@@ -224,10 +225,16 @@ func (r *Renderer) renderBox(ctx *renderContext, comp *types.Component, box Layo
 		draw.Draw(ctx.img, rect, &image.Uniform{bgColor}, image.Point{}, draw.Src)
 	}
 
-	// Draw border if specified
+	// Draw borders if specified
+	borderColor := color.RGBA{229, 229, 229, 255} // #E5E5E5
 	if comp.Layout.Border != "" {
-		borderColor := color.RGBA{229, 229, 229, 255} // #E5E5E5
 		r.drawRect(ctx.img, box.X, box.Y, box.Width, box.Height, borderColor)
+	}
+	if comp.Layout.BorderBottom != "" {
+		r.drawHorizontalLine(ctx.img, box.X, box.Y+box.Height-1, box.Width, borderColor)
+	}
+	if comp.Layout.BorderRight != "" {
+		r.drawVerticalLine(ctx.img, box.X+box.Width-1, box.Y, box.Height, borderColor)
 	}
 
 	// Render children using their pre-calculated layouts
@@ -251,20 +258,32 @@ func (r *Renderer) renderText(ctx *renderContext, comp *types.Component, box Lay
 		textColor = color.Black
 	}
 
-	// Draw text (using basic font for now)
-	point := fixed.Point26_6{
-		X: fixed.Int26_6(box.X * 64),
-		Y: fixed.Int26_6((box.Y + 12) * 64), // baseline offset
-	}
-
+	// Split content by newlines for multi-line text
+	lines := strings.Split(comp.Content, "\n")
+	lineHeight := 16 // pixels between lines
+	
 	d := &font.Drawer{
 		Dst:  ctx.img,
 		Src:  image.NewUniform(textColor),
 		Face: basicfont.Face7x13,
-		Dot:  point,
 	}
 
-	d.DrawString(comp.Content)
+	// Draw each line separately
+	currentLine := 0
+	for _, line := range lines {
+		if line == "" {
+			currentLine++ // Skip empty lines but still count for spacing
+			continue
+		}
+		
+		point := fixed.Point26_6{
+			X: fixed.Int26_6(box.X * 64),
+			Y: fixed.Int26_6((box.Y + 14 + (currentLine * lineHeight)) * 64),
+		}
+		d.Dot = point
+		d.DrawString(line)
+		currentLine++
+	}
 
 	return nil
 }
@@ -375,6 +394,20 @@ func (r *Renderer) drawRect(img *image.RGBA, x, y, width, height int, col color.
 	// Right
 	for i := 0; i < height; i++ {
 		img.Set(x+width-1, y+i, col)
+	}
+}
+
+// drawHorizontalLine draws a horizontal line
+func (r *Renderer) drawHorizontalLine(img *image.RGBA, x, y, width int, col color.Color) {
+	for i := 0; i < width; i++ {
+		img.Set(x+i, y, col)
+	}
+}
+
+// drawVerticalLine draws a vertical line
+func (r *Renderer) drawVerticalLine(img *image.RGBA, x, y, height int, col color.Color) {
+	for i := 0; i < height; i++ {
+		img.Set(x, y+i, col)
 	}
 }
 
