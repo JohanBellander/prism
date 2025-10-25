@@ -45,4 +45,5 @@ func init() {
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(showCmd)
 	rootCmd.AddCommand(compareCmd)
+	rootCmd.AddCommand(onboardCmd)
 }

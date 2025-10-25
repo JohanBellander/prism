@@ -56,6 +56,17 @@ make install
 
 ### For Humans
 
+**New to PRISM? Start here:**
+
+```bash
+# Set up a new project with examples and documentation
+prism onboard --project ./my-new-project
+
+# Follow the generated DESIGNPROCESS.md guide
+cd my-new-project
+cat DESIGNPROCESS.md
+```
+
 PRISM works with the [AI Design Agent two-phase process](DESIGNPROCESS.md). After your agent creates Phase 1 structure files, visualize them instantly:
 
 ```bash
@@ -76,6 +87,9 @@ Your agent creates the JSON. PRISM makes it visible.
 PRISM integrates seamlessly into agentic workflows:
 
 ```bash
+# Set up a new project
+prism onboard --project ./new-ui-project
+
 # After creating phase1-structure/v1.json, render it
 prism render ./project --version v1 --json
 
