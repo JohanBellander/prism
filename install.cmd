@@ -30,7 +30,14 @@ if errorlevel 1 (
 
 cd prism
 
-echo Building PRISM...
+REM Get version info
+for /f "tokens=*" %%i in ('git describe --tags --always 2^>nul') do set VERSION=%%i
+if "%VERSION%"=="" set VERSION=dev
+for /f "tokens=*" %%i in ('git rev-parse --short HEAD 2^>nul') do set COMMIT=%%i
+if "%COMMIT%"=="" set COMMIT=none
+for /f "tokens=*" %%i in ('powershell -Command "Get-Date -Format yyyy-MM-ddTHH:mm:ssZ"') do set DATE=%%i
+
+echo Building PRISM version %VERSION%...
 where go >nul 2>nul
 if errorlevel 1 (
     echo Error: Go is required to build PRISM
@@ -38,7 +45,7 @@ if errorlevel 1 (
     goto :cleanup
 )
 
-go build -o %BINARY_NAME% ./cmd/prism
+go build -ldflags "-X main.version=%VERSION% -X main.commit=%COMMIT% -X main.date=%DATE%" -o %BINARY_NAME% ./cmd/prism
 if errorlevel 1 (
     echo Error: Build failed
     goto :cleanup

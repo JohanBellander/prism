@@ -45,9 +45,14 @@ echo "Cloning repository..."
 git clone --depth 1 "https://github.com/$REPO.git" prism
 cd prism
 
-echo "Building PRISM..."
+# Get version info
+VERSION=$(git describe --tags --always 2>/dev/null || echo "dev")
+COMMIT=$(git rev-parse --short HEAD 2>/dev/null || echo "none")
+DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+echo "Building PRISM version $VERSION..."
 if command -v go >/dev/null 2>&1; then
-    go build -o "$BINARY_NAME" ./cmd/prism
+    go build -ldflags "-X main.version=$VERSION -X main.commit=$COMMIT -X main.date=$DATE" -o "$BINARY_NAME" ./cmd/prism
     mv "$BINARY_NAME" "$INSTALL_DIR/"
     chmod +x "$INSTALL_DIR/$BINARY_NAME"
 else

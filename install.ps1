@@ -24,9 +24,14 @@ try {
     git clone --depth 1 "https://github.com/$REPO.git" prism
     Set-Location prism
 
-    Write-Host "Building PRISM..." -ForegroundColor Yellow
+    # Get version info
+    $VERSION = (git describe --tags --always 2>$null) ?? "dev"
+    $COMMIT = (git rev-parse --short HEAD 2>$null) ?? "none"
+    $DATE = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+
+    Write-Host "Building PRISM version $VERSION..." -ForegroundColor Yellow
     if (Get-Command go -ErrorAction SilentlyContinue) {
-        go build -o $BINARY_NAME ./cmd/prism
+        go build -ldflags "-X main.version=$VERSION -X main.commit=$COMMIT -X main.date=$DATE" -o $BINARY_NAME ./cmd/prism
         Move-Item $BINARY_NAME $INSTALL_DIR -Force
     } else {
         Write-Host "Error: Go is required to build PRISM" -ForegroundColor Red
