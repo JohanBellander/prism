@@ -22,15 +22,27 @@ Stop squinting at JSON. See your Phase 1 structures as actual wireframes in seco
 
 ## Installation
 
-Quick install:
+**Quick install (Unix/macOS/Linux):**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/JohanBellander/prism/master/install.sh | bash
+```
+
+**Quick install (Windows PowerShell):**
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/JohanBellander/prism/master/install.ps1 | iex
+```
+
+**From source:**
+
+Requires Go 1.19 or later:
 
 ```bash
 git clone https://github.com/johanbellander/prism.git
 cd prism
 make build
 ```
-
-The binary will be in `bin/prism.exe` (Windows) or `bin/prism` (Unix).
 
 The binary will be in `bin/prism.exe` (Windows) or `bin/prism` (Unix).
 
