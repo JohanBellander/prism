@@ -1,0 +1,148 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T12:00:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Simple dashboard for testing",
+    "primary_action": "View metrics",
+    "user_context": "Admin users monitoring system health",
+    "key_interactions": ["view_metrics", "filter_data", "export_report"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 16,
+    "max_width": 1200,
+    "padding": 24
+  },
+  "components": [
+    {
+      "id": "header",
+      "type": "box",
+      "role": "header",
+      "layout": {
+        "display": "flex",
+        "direction": "horizontal",
+        "padding": 16,
+        "background": "#FFFFFF",
+        "border": "1px solid #E5E5E5",
+        "gap": 12
+      },
+      "children": [
+        {
+          "id": "logo",
+          "type": "box",
+          "layout": {
+            "display": "block",
+            "background": "#000000"
+          }
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "content": "Dashboard",
+          "size": "2xl",
+          "weight": "bold",
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "id": "metrics-grid",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "grid",
+        "padding": 0,
+        "gap": 16
+      },
+      "children": [
+        {
+          "id": "metric-1",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "padding": 24,
+            "background": "#FFFFFF",
+            "border": "1px solid #E5E5E5",
+            "gap": 8
+          },
+          "children": [
+            {
+              "id": "metric-1-label",
+              "type": "text",
+              "content": "Active Users",
+              "size": "sm",
+              "color": "#737373"
+            },
+            {
+              "id": "metric-1-value",
+              "type": "text",
+              "content": "1,234",
+              "size": "3xl",
+              "weight": "bold",
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "metric-2",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "padding": 24,
+            "background": "#FFFFFF",
+            "border": "1px solid #E5E5E5",
+            "gap": 8
+          },
+          "children": [
+            {
+              "id": "metric-2-label",
+              "type": "text",
+              "content": "Revenue",
+              "size": "sm",
+              "color": "#737373"
+            },
+            {
+              "id": "metric-2-value",
+              "type": "text",
+              "content": "$45,678",
+              "size": "3xl",
+              "weight": "bold",
+              "color": "#000000"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {
+      "breakpoint": 640,
+      "changes": {
+        "layout.padding": 16,
+        "metrics-grid.layout.direction": "vertical"
+      }
+    },
+    "tablet": {
+      "breakpoint": 1024,
+      "changes": {}
+    }
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "all_interactive_elements",
+    "semantic_structure": true
+  },
+  "validation": {
+    "visual_hierarchy": "passed",
+    "touch_targets": "passed",
+    "max_nesting_depth": 3,
+    "responsive_tested": true,
+    "notes": "All Phase 1 requirements met"
+  }
+}

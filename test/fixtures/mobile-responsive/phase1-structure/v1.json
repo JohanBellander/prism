@@ -1,0 +1,370 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T12:30:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Mobile-first banking app interface",
+    "primary_action": "View account and transactions",
+    "user_context": "Mobile users checking their finances",
+    "key_interactions": ["view_balance", "transfer", "view_transactions"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 0,
+    "max_width": 375,
+    "padding": 0
+  },
+  "components": [
+    {
+      "id": "mobile-header",
+      "type": "box",
+      "role": "header",
+      "layout": {
+        "display": "flex",
+        "direction": "horizontal",
+        "padding": 12,
+        "background": "#000000",
+        "gap": 12
+      },
+      "children": [
+        {
+          "id": "menu-icon",
+          "type": "box",
+          "layout": {
+            "display": "block",
+            "width": 24,
+            "height": 24,
+            "background": "#FFFFFF",
+            "border_radius": 2
+          }
+        },
+        {
+          "id": "app-title",
+          "type": "text",
+          "content": "Mobile App",
+          "size": "lg",
+          "weight": "bold",
+          "color": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "id": "content-scroll",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 16,
+        "background": "#E5E5E5",
+        "gap": 16
+      },
+      "children": [
+        {
+          "id": "hero-card",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "padding": 20,
+            "background": "#525252",
+            "border_radius": 12,
+            "gap": 12
+          },
+          "children": [
+            {
+              "id": "hero-title",
+              "type": "text",
+              "content": "Welcome Back!",
+              "size": "2xl",
+              "weight": "bold",
+              "color": "#FFFFFF"
+            },
+            {
+              "id": "hero-subtitle",
+              "type": "text",
+              "content": "You have 3 new notifications",
+              "size": "sm",
+              "color": "#E5E5E5"
+            },
+            {
+              "id": "hero-button",
+              "type": "button",
+              "content": "View All",
+              "layout": {
+                "background": "#FFFFFF",
+                "padding": 10,
+                "border_radius": 8
+              },
+              "color": "#525252",
+              "size": "sm",
+              "weight": "semibold"
+            }
+          ]
+        },
+        {
+          "id": "quick-actions",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "horizontal",
+            "gap": 12
+          },
+          "children": [
+            {
+              "id": "action-1",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "direction": "vertical",
+                "padding": 16,
+                "background": "#FFFFFF",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 8,
+                "gap": 8,
+                "flex": 1
+              },
+              "children": [
+                {
+                  "id": "action-icon-1",
+                  "type": "box",
+                  "layout": {
+                    "display": "block",
+                    "width": 40,
+                    "height": 40,
+                    "background": "#E5E5E5",
+                    "border_radius": "50%"
+                  }
+                },
+                {
+                  "id": "action-label-1",
+                  "type": "text",
+                  "content": "Transfer",
+                  "size": "xs",
+                  "weight": "medium",
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "id": "action-2",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "direction": "vertical",
+                "padding": 16,
+                "background": "#FFFFFF",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 8,
+                "gap": 8,
+                "flex": 1
+              },
+              "children": [
+                {
+                  "id": "action-icon-2",
+                  "type": "box",
+                  "layout": {
+                    "display": "block",
+                    "width": 40,
+                    "height": 40,
+                    "background": "#E5E5E5",
+                    "border_radius": "50%"
+                  }
+                },
+                {
+                  "id": "action-label-2",
+                  "type": "text",
+                  "content": "Pay",
+                  "size": "xs",
+                  "weight": "medium",
+                  "color": "#000000"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "transactions-section",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 12
+          },
+          "children": [
+            {
+              "id": "transactions-header",
+              "type": "text",
+              "content": "Recent Transactions",
+              "size": "md",
+              "weight": "semibold",
+              "color": "#000000"
+            },
+            {
+              "id": "transaction-1",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "direction": "horizontal",
+                "padding": 12,
+                "background": "#FFFFFF",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 8,
+                "gap": 12
+              },
+              "children": [
+                {
+                  "id": "transaction-icon-1",
+                  "type": "box",
+                  "layout": {
+                    "display": "block",
+                    "width": 36,
+                    "height": 36,
+                    "background": "#E5E5E5",
+                    "border_radius": "50%"
+                  }
+                },
+                {
+                  "id": "transaction-details-1",
+                  "type": "box",
+                  "layout": {
+                    "display": "flex",
+                    "direction": "vertical",
+                    "gap": 4,
+                    "flex": 1
+                  },
+                  "children": [
+                    {
+                      "id": "transaction-name-1",
+                      "type": "text",
+                      "content": "Coffee Shop",
+                      "size": "sm",
+                      "weight": "medium",
+                      "color": "#000000"
+                    },
+                    {
+                      "id": "transaction-date-1",
+                      "type": "text",
+                      "content": "Today, 9:30 AM",
+                      "size": "xs",
+                      "color": "#737373"
+                    }
+                  ]
+                },
+                {
+                  "id": "transaction-amount-1",
+                  "type": "text",
+                  "content": "-$4.50",
+                  "size": "sm",
+                  "weight": "semibold",
+                  "color": "#000000"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bottom-nav",
+      "type": "box",
+      "role": "navigation",
+      "layout": {
+        "display": "flex",
+        "direction": "horizontal",
+        "padding": 8,
+        "background": "#FFFFFF",
+        "border": "1px solid #E5E5E5"
+      },
+      "children": [
+        {
+          "id": "nav-item-1",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 4,
+            "flex": 1
+          },
+          "children": [
+            {
+              "id": "nav-icon-1",
+              "type": "box",
+              "layout": {
+                "display": "block",
+                "width": 24,
+                "height": 24,
+                "background": "#000000",
+                "border_radius": 4,
+                "margin": "auto"
+              }
+            },
+            {
+              "id": "nav-label-1",
+              "type": "text",
+              "content": "Home",
+              "size": "xs",
+              "weight": "medium",
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "id": "nav-item-2",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 4,
+            "flex": 1
+          },
+          "children": [
+            {
+              "id": "nav-icon-2",
+              "type": "box",
+              "layout": {
+                "display": "block",
+                "width": 24,
+                "height": 24,
+                "background": "#737373",
+                "border_radius": 4,
+                "margin": "auto"
+              }
+            },
+            {
+              "id": "nav-label-2",
+              "type": "text",
+              "content": "Cards",
+              "size": "xs",
+              "color": "#737373"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "tablet": {
+      "breakpoint": 768,
+      "changes": {
+        "layout.max_width": 768,
+        "quick-actions.layout.grid_columns": 4
+      }
+    }
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "all_interactive_elements",
+    "semantic_structure": true
+  },
+  "validation": {
+    "visual_hierarchy": "passed",
+    "touch_targets": "passed",
+    "max_nesting_depth": 4,
+    "responsive_tested": true,
+    "notes": "Mobile-first design with bottom navigation"
+  }
+}

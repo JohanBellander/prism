@@ -1,0 +1,54 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T12:00:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Invalid test - uses non-Phase-1 colors",
+    "primary_action": "Test",
+    "user_context": "Testing",
+    "key_interactions": ["test"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 8,
+    "max_width": 1200,
+    "padding": 24
+  },
+  "components": [
+    {
+      "id": "header",
+      "type": "box",
+      "role": "header",
+      "layout": {
+        "display": "flex",
+        "background": "#FF0000"
+      },
+      "children": [
+        {
+          "id": "title",
+          "type": "text",
+          "content": "Invalid Color",
+          "color": "#0000FF"
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {"breakpoint": 640, "changes": {}},
+    "tablet": {"breakpoint": 1024, "changes": {}}
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "all",
+    "semantic_structure": true
+  },
+  "validation": {
+    "visual_hierarchy": "passed",
+    "touch_targets": "passed",
+    "max_nesting_depth": 4,
+    "responsive_tested": true
+  }
+}

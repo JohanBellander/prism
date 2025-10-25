@@ -1,0 +1,245 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T12:30:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Registration form with multiple input fields and validation",
+    "primary_action": "Create account",
+    "user_context": "New users signing up for the service",
+    "key_interactions": ["fill_form", "submit", "social_login"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 24,
+    "max_width": 600,
+    "padding": 40
+  },
+  "components": [
+    {
+      "id": "form-container",
+      "type": "box",
+      "role": "form",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 32,
+        "background": "#FFFFFF",
+        "border": "1px solid #E5E5E5",
+        "border_radius": 12,
+        "gap": 20
+      },
+      "children": [
+        {
+          "id": "form-title",
+          "type": "text",
+          "content": "Create Account",
+          "size": "3xl",
+          "weight": "bold",
+          "color": "#000000"
+        },
+        {
+          "id": "form-subtitle",
+          "type": "text",
+          "content": "Fill in your details to get started",
+          "size": "sm",
+          "color": "#737373"
+        },
+        {
+          "id": "name-field",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 8
+          },
+          "children": [
+            {
+              "id": "name-label",
+              "type": "text",
+              "content": "Full Name",
+              "size": "sm",
+              "weight": "medium",
+              "color": "#525252"
+            },
+            {
+              "id": "name-input",
+              "type": "input",
+              "placeholder": "Enter your full name",
+              "layout": {
+                "background": "#E5E5E5",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 6,
+                "padding": 12
+              }
+            }
+          ]
+        },
+        {
+          "id": "email-field",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 8
+          },
+          "children": [
+            {
+              "id": "email-label",
+              "type": "text",
+              "content": "Email Address",
+              "size": "sm",
+              "weight": "medium",
+              "color": "#525252"
+            },
+            {
+              "id": "email-input",
+              "type": "input",
+              "placeholder": "you@example.com",
+              "layout": {
+                "background": "#E5E5E5",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 6,
+                "padding": 12
+              }
+            }
+          ]
+        },
+        {
+          "id": "password-field",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 8
+          },
+          "children": [
+            {
+              "id": "password-label",
+              "type": "text",
+              "content": "Password",
+              "size": "sm",
+              "weight": "medium",
+              "color": "#525252"
+            },
+            {
+              "id": "password-input",
+              "type": "input",
+              "placeholder": "••••••••",
+              "layout": {
+                "background": "#E5E5E5",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 6,
+                "padding": 12
+              }
+            }
+          ]
+        },
+        {
+          "id": "submit-button",
+          "type": "button",
+          "content": "Create Account",
+          "layout": {
+            "background": "#000000",
+            "padding": 14,
+            "border_radius": 8
+          },
+          "color": "#FFFFFF",
+          "size": "md",
+          "weight": "semibold"
+        },
+        {
+          "id": "divider",
+          "type": "box",
+          "layout": {
+            "display": "block",
+            "height": 1,
+            "background": "#E5E5E5"
+          }
+        },
+        {
+          "id": "social-login",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 12
+          },
+          "children": [
+            {
+              "id": "social-title",
+              "type": "text",
+              "content": "Or continue with",
+              "size": "sm",
+              "color": "#737373"
+            },
+            {
+              "id": "social-buttons",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "direction": "horizontal",
+                "gap": 12
+              },
+              "children": [
+                {
+                  "id": "google-button",
+                  "type": "button",
+                  "content": "Google",
+                  "layout": {
+                    "background": "#FFFFFF",
+                    "border": "1px solid #E5E5E5",
+                    "padding": 12,
+                    "border_radius": 6,
+                    "flex": 1
+                  },
+                  "color": "#000000",
+                  "size": "sm",
+                  "weight": "medium"
+                },
+                {
+                  "id": "github-button",
+                  "type": "button",
+                  "content": "GitHub",
+                  "layout": {
+                    "background": "#FFFFFF",
+                    "border": "1px solid #E5E5E5",
+                    "padding": 12,
+                    "border_radius": 6,
+                    "flex": 1
+                  },
+                  "color": "#000000",
+                  "size": "sm",
+                  "weight": "medium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {
+      "breakpoint": 640,
+      "changes": {
+        "layout.padding": 16,
+        "form-container.layout.padding": 24
+      }
+    }
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "all_interactive_elements",
+    "semantic_structure": true
+  },
+  "validation": {
+    "visual_hierarchy": "passed",
+    "touch_targets": "passed",
+    "max_nesting_depth": 4,
+    "responsive_tested": true,
+    "notes": "Form with proper field labels and accessibility"
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T12:30:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Complex dashboard layout with sidebar and multiple content sections",
+    "primary_action": "Navigate and view analytics",
+    "user_context": "Admin users managing a complex application",
+    "key_interactions": ["navigate_menu", "view_stats", "read_activity"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "horizontal",
+    "spacing": 16,
+    "max_width": 1200,
+    "padding": 20
+  },
+  "components": [
+    {
+      "id": "sidebar",
+      "type": "box",
+      "role": "navigation",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 16,
+        "background": "#525252",
+        "gap": 12,
+        "min_width": 250
+      },
+      "children": [
+        {
+          "id": "sidebar-title",
+          "type": "text",
+          "content": "Navigation",
+          "size": "lg",
+          "weight": "bold",
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "menu-item-1",
+          "type": "button",
+          "content": "Dashboard",
+          "layout": {
+            "background": "#000000",
+            "padding": 12,
+            "border_radius": 4
+          },
+          "color": "#FFFFFF"
+        },
+        {
+          "id": "menu-item-2",
+          "type": "button",
+          "content": "Analytics",
+          "layout": {
+            "background": "#E5E5E5",
+            "padding": 12,
+            "border_radius": 4
+          },
+          "color": "#737373"
+        }
+      ]
+    },
+    {
+      "id": "main-content",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 20,
+        "background": "#E5E5E5",
+        "gap": 20,
+        "flex": 1
+      },
+      "children": [
+        {
+          "id": "page-header",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "vertical",
+            "gap": 8
+          },
+          "children": [
+            {
+              "id": "page-title",
+              "type": "text",
+              "content": "Dashboard Overview",
+              "size": "3xl",
+              "weight": "bold",
+              "color": "#525252"
+            }
+          ]
+        },
+        {
+          "id": "stats-grid",
+          "type": "box",
+          "layout": {
+            "display": "grid",
+            "gap": 16,
+            "grid_columns": 3
+          },
+          "children": [
+            {
+              "id": "stat-card-1",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "direction": "vertical",
+                "padding": 16,
+                "background": "#FFFFFF",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 8,
+                "gap": 8
+              },
+              "children": [
+                {
+                  "id": "stat-label-1",
+                  "type": "text",
+                  "content": "Total Users",
+                  "size": "xs",
+                  "color": "#737373"
+                },
+                {
+                  "id": "stat-value-1",
+                  "type": "text",
+                  "content": "24,567",
+                  "size": "3xl",
+                  "weight": "bold",
+                  "color": "#525252"
+                }
+              ]
+            },
+            {
+              "id": "stat-card-2",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "direction": "vertical",
+                "padding": 16,
+                "background": "#FFFFFF",
+                "border": "1px solid #E5E5E5",
+                "border_radius": 8,
+                "gap": 8
+              },
+              "children": [
+                {
+                  "id": "stat-label-2",
+                  "type": "text",
+                  "content": "Revenue",
+                  "size": "xs",
+                  "color": "#737373"
+                },
+                {
+                  "id": "stat-value-2",
+                  "type": "text",
+                  "content": "$125,432",
+                  "size": "3xl",
+                  "weight": "bold",
+                  "color": "#525252"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {
+      "breakpoint": 640,
+      "changes": {
+        "layout.direction": "vertical"
+      }
+    }
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "all_interactive_elements",
+    "semantic_structure": true
+  },
+  "validation": {
+    "visual_hierarchy": "passed",
+    "touch_targets": "passed",
+    "max_nesting_depth": 4,
+    "responsive_tested": true,
+    "notes": "Complex layout with sidebar navigation"
+  }
+}

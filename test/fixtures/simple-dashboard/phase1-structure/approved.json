@@ -1,0 +1,63 @@
+{
+  "version": "v2",
+  "phase": "structure",
+  "created_at": "2025-10-25T14:00:00Z",
+  "locked": true,
+  "locked_at": "2025-10-25T14:00:00Z",
+  "approved_by": "user",
+  "note": "Structure approved. Moving to Phase 2.",
+  "intent": {
+    "purpose": "Simple dashboard for testing - APPROVED",
+    "primary_action": "View metrics",
+    "user_context": "Admin users monitoring system health",
+    "key_interactions": ["view_metrics", "filter_data", "export_report"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 24,
+    "max_width": 1200,
+    "padding": 32
+  },
+  "components": [
+    {
+      "id": "header",
+      "type": "box",
+      "role": "header",
+      "layout": {
+        "display": "flex",
+        "direction": "horizontal",
+        "padding": 20,
+        "background": "#FFFFFF",
+        "border": "1px solid #E5E5E5",
+        "gap": 16
+      },
+      "children": [
+        {
+          "id": "title",
+          "type": "text",
+          "content": "Dashboard - Approved",
+          "size": "3xl",
+          "weight": "bold",
+          "color": "#000000"
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {"breakpoint": 640, "changes": {}},
+    "tablet": {"breakpoint": 1024, "changes": {}}
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "all_interactive_elements",
+    "semantic_structure": true
+  },
+  "validation": {
+    "visual_hierarchy": "passed",
+    "touch_targets": "passed",
+    "max_nesting_depth": 2,
+    "responsive_tested": true
+  }
+}

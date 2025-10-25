@@ -1,0 +1,53 @@
+{
+  "id": "simple-dashboard-invalid",
+  "version": "invalid-colors",
+  "created": "2025-10-25T10:00:00Z",
+  "approved": false,
+  "viewport": {
+    "width": 1200,
+    "height": 400
+  },
+  "root": {
+    "id": "root",
+    "type": "box",
+    "layout": {
+      "position": "relative",
+      "width": 1200,
+      "height": 400,
+      "padding": {"top": 20, "right": 20, "bottom": 20, "left": 20},
+      "gap": 16,
+      "direction": "horizontal"
+    },
+    "style": {
+      "background": "not-a-valid-color"
+    },
+    "children": [
+      {
+        "id": "header",
+        "type": "box",
+        "layout": {
+          "position": "relative",
+          "width": 300,
+          "height": 360,
+          "padding": {"top": 16, "right": 16, "bottom": 16, "left": 16}
+        },
+        "style": {
+          "background": "invalid-hex",
+          "borderRadius": "8px"
+        },
+        "children": [
+          {
+            "id": "title",
+            "type": "text",
+            "content": "Dashboard with Invalid Colors",
+            "style": {
+              "color": "#gggggg",
+              "fontSize": "24px",
+              "fontWeight": "bold"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,260 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T12:30:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Test edge cases like zero padding, color formats, border radius variations",
+    "primary_action": "View test cases",
+    "user_context": "Developers testing renderer edge cases",
+    "key_interactions": ["inspect_variations"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 16,
+    "max_width": 800,
+    "padding": 20
+  },
+  "components": [
+    {
+      "id": "section-1",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 12,
+        "background": "#E5E5E5",
+        "border": "1px solid #E5E5E5",
+        "border_radius": 4,
+        "gap": 8
+      },
+      "children": [
+        {
+          "id": "title-1",
+          "type": "text",
+          "content": "Minimum Padding Test",
+          "size": "sm",
+          "weight": "bold",
+          "color": "#000000"
+        },
+        {
+          "id": "box-1",
+          "type": "box",
+          "layout": {
+            "display": "block",
+            "padding": 0,
+            "background": "#737373",
+            "border_radius": 2
+          },
+          "children": [
+            {
+              "id": "text-1",
+              "type": "text",
+              "content": "Zero padding box",
+              "size": "xs",
+              "color": "#FFFFFF"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-2",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 12,
+        "background": "#E5E5E5",
+        "border": "1px solid #E5E5E5",
+        "border_radius": 4,
+        "gap": 8
+      },
+      "children": [
+        {
+          "id": "title-2",
+          "type": "text",
+          "content": "Mixed Color Formats",
+          "size": "sm",
+          "weight": "bold",
+          "color": "#000000"
+        },
+        {
+          "id": "color-samples",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "horizontal",
+            "gap": 8
+          },
+          "children": [
+            {
+              "id": "hex-6",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "padding": 8,
+                "background": "#000000",
+                "border_radius": 4,
+                "min_width": 100
+              },
+              "children": [
+                {
+                  "id": "hex-6-label",
+                  "type": "text",
+                  "content": "#000000",
+                  "size": "xs",
+                  "color": "#FFFFFF"
+                }
+              ]
+            },
+            {
+              "id": "hex-3",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "padding": 8,
+                "background": "#737373",
+                "border_radius": 4,
+                "min_width": 100
+              },
+              "children": [
+                {
+                  "id": "hex-3-label",
+                  "type": "text",
+                  "content": "#737373",
+                  "size": "xs",
+                  "color": "#000000"
+                }
+              ]
+            },
+            {
+              "id": "rgb",
+              "type": "box",
+              "layout": {
+                "display": "flex",
+                "padding": 8,
+                "background": "#000000",
+                "border_radius": 4,
+                "min_width": 120
+              },
+              "children": [
+                {
+                  "id": "rgb-label",
+                  "type": "text",
+                  "content": "rgb(0,0,255)",
+                  "size": "xs",
+                  "color": "#FFFFFF"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 12,
+        "background": "#E5E5E5",
+        "border": "1px solid #E5E5E5",
+        "border_radius": 4,
+        "gap": 8
+      },
+      "children": [
+        {
+          "id": "title-3",
+          "type": "text",
+          "content": "Border Radius Variations",
+          "size": "sm",
+          "weight": "bold",
+          "color": "#000000"
+        },
+        {
+          "id": "radius-samples",
+          "type": "box",
+          "layout": {
+            "display": "flex",
+            "direction": "horizontal",
+            "gap": 12
+          },
+          "children": [
+            {
+              "id": "radius-0",
+              "type": "box",
+              "layout": {
+                "display": "block",
+                "width": 60,
+                "height": 60,
+                "background": "#525252",
+                "border_radius": 0
+              }
+            },
+            {
+              "id": "radius-4",
+              "type": "box",
+              "layout": {
+                "display": "block",
+                "width": 60,
+                "height": 60,
+                "background": "#525252",
+                "border_radius": 4
+              }
+            },
+            {
+              "id": "radius-8",
+              "type": "box",
+              "layout": {
+                "display": "block",
+                "width": 60,
+                "height": 60,
+                "background": "#525252",
+                "border_radius": 8
+              }
+            },
+            {
+              "id": "radius-50",
+              "type": "box",
+              "layout": {
+                "display": "block",
+                "width": 60,
+                "height": 60,
+                "background": "#525252",
+                "border_radius": "50%"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {
+      "breakpoint": 640,
+      "changes": {
+        "color-samples.layout.direction": "vertical",
+        "radius-samples.layout.direction": "vertical"
+      }
+    }
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "all_interactive_elements",
+    "semantic_structure": true
+  },
+  "validation": {
+    "visual_hierarchy": "passed",
+    "touch_targets": "passed",
+    "max_nesting_depth": 3,
+    "responsive_tested": true,
+    "notes": "Edge cases for color formats and styling"
+  }
+}
