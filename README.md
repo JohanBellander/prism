@@ -1,209 +1,310 @@
-# PRISM
+# PRISM 🎨
 
-A CLI tool that generates visual PNG representations of Phase 1 structural mockups from AI Design Agent processes.
+**Phase Render & Inspection for Structural Mockups**
 
-PRISM (Phase Render & Inspection for Structural Mockups) transforms JSON structure files into visual wireframes, enabling quick review and approval workflows.
+> Transform JSON mockups into visual wireframes instantly
+
+PRISM is a CLI tool that generates visual PNG representations of Phase 1 structural mockups from your AI Design Agent workflow. It bridges the gap between JSON structure files and visual wireframes, enabling fast review and approval cycles.
+
+Stop squinting at JSON. See your Phase 1 structures as actual wireframes in seconds.
 
 ## Features
 
-- **Visual Mockup Generation**: Convert Phase 1 JSON structures to PNG wireframes
-- **Multiple Viewports**: Support for mobile, tablet, and desktop layouts
-- **Version Comparison**: Side-by-side visual comparison of different versions
-- **Batch Rendering**: Render all versions at once with `--all` flag
-- **Validation**: Validate JSON structures against Phase 1 constraints
-- **JSON-First Output**: All commands support `--json` for programmatic use
-- **Version Management**: Track and list different structure versions
+✨ **Zero-config rendering** - Point at a project directory and get PNGs  
+🖼️ **Multi-viewport support** - Mobile, tablet, and desktop layouts  
+🔍 **Side-by-side comparison** - Visual diff between versions  
+⚡ **Batch rendering** - Render all versions with `--all` flag  
+✅ **Phase 1 validation** - Strict constraint checking (black/white only, no styling)  
+🤖 **Agent-friendly** - `--json` output for programmatic integration  
+📋 **Version tracking** - List, show, and compare structure versions  
+🎯 **Layout engine** - Flexbox, grid, and stack layouts  
+🧩 **Component library** - Box, text, button, input, image rendering
 
 ## Installation
 
-### From Source
-
-Requires Go 1.19 or later:
+Quick install:
 
 ```bash
-# Clone the repository
 git clone https://github.com/johanbellander/prism.git
 cd prism
-
-# Build the binary
 make build
+```
 
-# Or install to GOPATH/bin
+The binary will be in `bin/prism.exe` (Windows) or `bin/prism` (Unix).
+
+The binary will be in `bin/prism.exe` (Windows) or `bin/prism` (Unix).
+
+Or install directly to your Go bin:
+
+```bash
 make install
 ```
 
-### Pre-built Binaries
-
-Download the latest release from the [releases page](https://github.com/johanbellander/prismer/releases).
-
 ## Quick Start
+
+### For Humans
+
+PRISM works with the [AI Design Agent two-phase process](DESIGNPROCESS.md). After your agent creates Phase 1 structure files, visualize them instantly:
 
 ```bash
 # Render the latest version
-prism render ./my-project
+prism render ./my-dashboard
 
-# Render a specific version
-prism render ./my-project --version v2
+# See all versions
+prism list --project ./my-dashboard
 
-# Render all versions at once
-prism render ./my-project --all
-
-# Compare two versions side-by-side
-prism compare ./my-project --from v1 --to v2
-
-# List available versions
-prism list --project ./my-project
-
-# Validate structure
-prism validate ./my-project
-
-# Show version details
-prism show v1
+# Compare two versions
+prism compare ./my-dashboard --from v1 --to v2
 ```
 
-## Commands
+Your agent creates the JSON. PRISM makes it visible.
 
-### render
+### For AI Agents
 
-Render a Phase 1 structure JSON file to a visual PNG mockup.
+PRISM integrates seamlessly into agentic workflows:
 
 ```bash
-prism render [project-path] [flags]
+# After creating phase1-structure/v1.json, render it
+prism render ./project --version v1 --json
+
+# Validate before rendering
+prism validate ./project --json
+
+# Batch render all versions for review
+prism render ./project --all --json
+
+# Compare versions programmatically
+prism compare ./project --from v1 --to v2 --json
 ```
 
-**Flags:**
-- `--version`, `-v`: Version to render (default: "latest")
-- `--output`, `-o`: Output file path
-- `--width`, `-w`: Canvas width in pixels (default: 1200)
-- `--viewport`: Target viewport (mobile, tablet, desktop)
-- `--annotations`, `-a`: Include annotations
-- `--all`: Render all versions found in phase1-structure directory
-- `--json`: Output in JSON format
+All commands support `--json` for structured output your agent can parse.
 
-**Examples:**
+All commands support `--json` for structured output your agent can parse.
+
+## Usage
+
+### Rendering Mockups
 
 ```bash
 # Render latest version
 prism render ./my-dashboard
 
-# Render specific version for mobile
-prism render ./my-dashboard --version v2 --viewport mobile
+# Render specific version
+prism render ./my-dashboard --version v2
+
+# Render for different viewports
+prism render ./my-dashboard --viewport mobile
+prism render ./my-dashboard --viewport tablet
+prism render ./my-dashboard --viewport desktop
+
+# Custom dimensions
+prism render ./my-dashboard --width 1920 --height 1080
 
 # Render all versions at once
 prism render ./my-dashboard --all
 
-# Get JSON output
-prism render ./my-dashboard --all --json
+# Save to specific location
+prism render ./my-dashboard --output mockups/v1.png
+
+# JSON output for agents
+prism render ./my-dashboard --json
 ```
 
-### validate
+### Comparing Versions
 
-Validate a Phase 1 structure JSON file.
-
-```bash
-prism validate [project-path] [flags]
-```
-
-**Flags:**
-- `--phase`: Phase to validate against (default: 1)
-- `--json`: Output in JSON format
-
-### list
-
-List all available versions in a project.
-
-```bash
-prism list [flags]
-```
-
-**Flags:**
-- `--project`, `-p`: Project directory path
-- `--json`: Output in JSON format
-
-### show
-
-Show detailed information about a specific version.
-
-```bash
-prism show [version] [flags]
-```
-
-**Flags:**
-- `--json`: Output in JSON format
-
-### compare
-
-Compare two versions side-by-side in a single PNG.
-
-```bash
-prism compare [project-path] [flags]
-```
-
-**Flags:**
-- `--from`: Source version to compare from (default: "v1")
-- `--to`: Target version to compare to (default: "v2")
-- `--output`, `-o`: Output file path (default: {project}-compare-{from}-{to}.png)
-- `--json`: Output in JSON format
-
-**Examples:**
+Side-by-side visual comparison of structure changes:
 
 ```bash
 # Compare v1 and v2
 prism compare ./my-dashboard --from v1 --to v2
 
-# Compare with custom output
-prism compare ./my-dashboard --from v1 --to approved --output comparison.png
+# Compare with custom output path
+prism compare ./my-dashboard --from v1 --to approved --output diff.png
 
-# Get JSON output
+# JSON output
 prism compare ./my-dashboard --from v1 --to v2 --json
+```
+
+### Validating Structures
+
+Ensure Phase 1 constraints are met (black/white only, no styling):
+
+```bash
+# Validate project
+prism validate ./my-dashboard
+
+# Validate specific phase
+prism validate ./my-dashboard --phase 1
+
+# JSON output for CI/CD
+prism validate ./my-dashboard --json
+```
+
+### Listing Versions
+
+```bash
+# List all versions in project
+prism list --project ./my-dashboard
+
+# JSON output
+prism list --project ./my-dashboard --json
+```
+
+### Showing Version Details
+
+```bash
+# Show version metadata
+prism show v1
+
+# JSON output
+prism show v1 --json
+```
+
+prism show v1 --json
 ```
 
 ## Global Flags
 
-- `--json`: Output in JSON format
-- `--project`, `-p`: Project directory path (default: "./")
-- `--quiet`, `-q`: Suppress non-essential output
-- `--config`: Config file path
+All commands support these flags:
+
+- `--json` - Output in JSON format for programmatic use
+- `--project`, `-p` - Project directory path (default: `./`)
+- `--quiet`, `-q` - Suppress non-essential output
+- `--config` - Config file path (default: `~/.prism`)
+
+## The Design Process
+
+PRISM is built for the [two-phase AI design workflow](DESIGNPROCESS.md):
+
+**Phase 1**: Structure-only mockups (black & white, no styling)  
+**Phase 2**: Design system styling (applied after Phase 1 approval)
+
+PRISM renders Phase 1 structures, making them visual and reviewable before moving to Phase 2. This prevents the common problem of structural changes sneaking in during the styling phase.
+
+Your AI agent creates `phase1-structure/v1.json`, `v2.json`, etc. PRISM turns them into PNGs. You approve. The agent moves to Phase 2.
+
+Simple. Fast. No surprises.
+
+## Project Structure
+
+```
+your-project/
+├── phase1-structure/       # Created by your AI agent
+│   ├── v1.json            # First structure iteration
+│   ├── v2.json            # Revised structure
+│   └── approved.json      # Approved for Phase 2
+└── mockups/               # Created by PRISM
+    ├── v1.png
+    ├── v2.png
+    └── approved.png
+```
+
+## Integration Examples
+
+### CI/CD Pipeline
+
+```bash
+# Validate all structures in CI
+prism validate ./project --json | jq '.valid'
+
+# Generate mockups for pull request reviews
+prism render ./project --all
+```
+
+### Git Hooks
+
+```bash
+# pre-commit hook: validate before committing
+#!/bin/bash
+if ! prism validate . --quiet; then
+    echo "Phase 1 validation failed"
+    exit 1
+fi
+```
+
+### Agent Workflow
+
+Your AI agent can use PRISM programmatically:
+
+```python
+import subprocess
+import json
+
+# After creating structure file
+result = subprocess.run(
+    ["prism", "render", "./project", "--version", "v1", "--json"],
+    capture_output=True,
+    text=True
+)
+output = json.loads(result.stdout)
+print(f"Rendered: {output['output_path']}")
+```
 
 ## Development
 
 ### Prerequisites
 
 - Go 1.19 or later
-- Make (optional, but recommended)
+- Make
 
 ### Building
 
 ```bash
-# Build the binary
+# Build
 make build
 
 # Run tests
 make test
 
-# Format code
+# Format and lint
 make fmt
-
-# Run linters
 make lint
 
-# Show all available targets
+# See all targets
 make help
 ```
 
-### Project Structure
+### Code Structure
 
 ```
 prism/
-├── cmd/prism/             # CLI commands
-├── internal/              # Internal packages
-│   ├── config/           # Configuration
-│   ├── render/           # Rendering engine
-│   ├── types/            # Data structures
-│   └── validate/         # Validation logic
-├── Makefile              # Build automation
-└── README.md             # This file
+├── cmd/prism/             # CLI commands (render, validate, list, show, compare)
+├── internal/
+│   ├── render/           # Rendering engine (layout calculation, PNG generation)
+│   └── types/            # Data structures (Phase 1 schema)
+├── test/
+│   └── fixtures/         # Test structures and expected outputs
+├── Makefile
+└── README.md
 ```
+
+## Documentation
+
+- [README.md](README.md) - You are here!
+- [DESIGNPROCESS.md](DESIGNPROCESS.md) - Two-phase design workflow guide
+- [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) - Development roadmap and architecture
+- [prism-spec.md](prism-spec.md) - Complete technical specification
+- [AGENTS.md](AGENTS.md) - AI agent integration guide
+
+## Status
+
+✅ **Production Ready** - All Phase 1 features complete and tested
+
+**Implemented:**
+- Render command with PNG output
+- Validate command with Phase 1 constraints
+- List command for version discovery
+- Show command for version details
+- Compare command for side-by-side diffs
+- Batch rendering with `--all`
+- Multi-viewport support (mobile/tablet/desktop)
+- JSON output for all commands
+- Layout engine (flexbox, grid, stack)
+- Component rendering (box, text, button, input, image)
+- 18/18 tests passing
+
+**Roadmap:**
+See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for Phase 2 and Phase 3 plans (annotations, CI/CD integration, interactive viewer).
 
 ## License
 
@@ -213,21 +314,8 @@ MIT License - See LICENSE file for details
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Status
+## About
 
-✅ **Core Functionality Complete** - All Phase 1 features implemented and tested.
+PRISM - Making AI-designed mockups visible
 
-**Completed Features:**
-- ✅ Render command with PNG output
-- ✅ Validate command with Phase 1 constraint checking
-- ✅ List command for version discovery
-- ✅ Show command for version details
-- ✅ Compare command for side-by-side version comparison
-- ✅ Batch rendering with `--all` flag
-- ✅ Multi-viewport support (mobile, tablet, desktop)
-- ✅ JSON output for all commands
-- ✅ Comprehensive test suite (18/18 tests passing)
-- ✅ Layout calculation engine (flex, grid, stack)
-- ✅ Component rendering (box, text, button, input, image)
-
-See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for the development roadmap and future enhancements.
+Built for developers working with AI design agents who need fast visual feedback on structural iterations.
