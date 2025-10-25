@@ -1,0 +1,93 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T22:00:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Test fixture designed to fail contrast validation",
+    "primary_action": "Demonstrate poor color contrast",
+    "user_context": "Testing",
+    "key_interactions": []
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 16,
+    "max_width": 1200,
+    "padding": 24
+  },
+  "components": [
+    {
+      "id": "header",
+      "type": "box",
+      "role": "header",
+      "layout": {
+        "display": "flex",
+        "direction": "horizontal",
+        "padding": 16,
+        "background": "#FFFFFF"
+      },
+      "children": [
+        {
+          "id": "low_contrast_text",
+          "type": "text",
+          "content": "Hard to Read Text",
+          "size": "base",
+          "weight": "normal",
+          "color": "#CCCCCC",
+          "layout": {}
+        }
+      ]
+    },
+    {
+      "id": "content",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 24,
+        "background": "#F0F0F0",
+        "gap": 16
+      },
+      "children": [
+        {
+          "id": "gray_on_gray",
+          "type": "text",
+          "content": "Gray on Gray",
+          "size": "base",
+          "weight": "normal",
+          "color": "#999999",
+          "layout": {}
+        },
+        {
+          "id": "button_low_contrast",
+          "type": "button",
+          "content": "Submit",
+          "color": "#FFFF00",
+          "layout": {
+            "width": 120,
+            "height": 44,
+            "background": "#FFFFFF"
+          }
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {
+      "max_width": 375
+    },
+    "tablet": {
+      "max_width": 768
+    }
+  },
+  "accessibility": {
+    "heading_structure": true,
+    "label_requirements": true
+  },
+  "validation": {
+    "max_nesting_depth": 4,
+    "touch_targets_min": 44
+  }
+}

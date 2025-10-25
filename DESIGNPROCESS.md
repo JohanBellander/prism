@@ -797,6 +797,543 @@ For Phase 2 (design application), you may need to generate actual HTML/CSS/JavaS
 
 ---
 
+# ═══════════════════════════════════════════════════════
+# DESIGN PRINCIPLES VALIDATION
+# ═══════════════════════════════════════════════════════
+
+## Design Principles Validation
+
+PRISM includes comprehensive validation capabilities that check your designs against established UX principles and accessibility standards. Understanding when validations run, how to interpret results, and how to address issues is critical to producing high-quality UIs.
+
+### Validation Phases
+
+Validation is separated into two phases matching the design process:
+
+#### Phase 1: Structural Validation (Black & White)
+
+These validators check the fundamental structure and usability of your interface **before** visual design is applied:
+
+**1. Visual Hierarchy** (`--hierarchy`)
+- **What it checks**: Size relationships, nesting depth, contrast between levels
+- **Why it matters**: Users need to instantly understand what's most important
+- **Common failures**:
+  - Headings smaller than body text
+  - Too many elements at the same visual level (flat hierarchy)
+  - Nesting depth > 4 levels (cognitive overload)
+- **How to fix**: Increase size differences, reduce component nesting, create clear parent-child relationships
+
+**2. Touch Targets** (`--touch-targets`)
+- **What it checks**: Interactive elements meet 44x44px minimum (iOS HIG / WCAG 2.1 AA)
+- **Why it matters**: Small targets cause frustration and accessibility issues
+- **Common failures**:
+  - Buttons < 44px in height or width
+  - Icon-only buttons without padding
+  - Closely packed interactive elements
+- **How to fix**: Add padding, increase button sizes, add spacing between interactive elements
+
+**3. Gestalt Principles** (`--gestalt`)
+- **What it checks**: Proximity, similarity, continuity, closure
+- **Why it matters**: How the human brain naturally groups visual information
+- **Common failures**:
+  - Related elements too far apart (proximity violation)
+  - Inconsistent spacing within groups
+  - Unclear visual grouping boundaries
+- **How to fix**: Reduce space within groups, increase space between groups, use consistent spacing
+
+**4. Accessibility - WCAG** (`--accessibility`)
+- **What it checks**: Semantic structure, focus indicators, labels, logical tab order
+- **Why it matters**: Screen readers and keyboard navigation require proper structure
+- **Common failures**:
+  - Missing labels on form inputs
+  - No visible focus indicators
+  - Illogical tab order
+  - Missing semantic roles
+- **How to fix**: Add aria-labels, define focus states, use semantic HTML roles, order interactive elements logically
+
+**5. Choice Overload** (`--choice-overload`)
+- **What it checks**: Hick's Law compliance (decision time increases with options)
+- **Why it matters**: Too many choices paralyze users
+- **Common failures**:
+  - > 7 navigation items in a single menu
+  - > 5 primary actions visible simultaneously
+  - Long lists without categorization
+- **How to fix**: Combine similar options, use progressive disclosure, categorize choices, prioritize primary actions
+
+#### Phase 2: Visual Design Validation (Styled UI)
+
+These validators check the visual polish and design system compliance **after** structure is approved:
+
+**6. Color Contrast** (`--contrast`)
+- **What it checks**: WCAG AA/AAA compliance (text: 4.5:1, large text: 3:1)
+- **Why it matters**: Low contrast text is unreadable, especially for vision-impaired users
+- **Common failures**:
+  - Light gray text on white backgrounds
+  - Colored text on colored backgrounds
+  - Disabled states with insufficient contrast
+- **How to fix**: Use darker text colors, increase luminosity difference, check with contrast tools
+
+**7. Typography Scale** (`--typography`)
+- **What it checks**: Font sizes adhere to defined scale (12, 14, 16, 18, 20, 24, 30, 36)
+- **Why it matters**: Consistent type scale creates visual harmony
+- **Common failures**:
+  - Arbitrary font sizes (e.g., 17px, 22px)
+  - Too many type sizes
+  - Insufficient size variation for hierarchy
+- **How to fix**: Round to nearest scale value, reduce unique font sizes to 3-5 variants
+
+**8. Spacing (8pt Grid)** (`--spacing`)
+- **What it checks**: All spacing values are multiples of 8 (or 4 for fine-tuning)
+- **Why it matters**: Consistent spacing creates visual rhythm and makes designs scalable
+- **Common failures**:
+  - Random padding values (e.g., 13px, 27px)
+  - Inconsistent gaps between similar elements
+  - Off-grid alignment
+- **How to fix**: Round to nearest 8px value, use 4px for small adjustments only
+
+**9. Shadow & Elevation** (`--elevation`)
+- **What it checks**: Shadow consistency, appropriate elevation levels
+- **Why it matters**: Shadows indicate layering and interactivity
+- **Common failures**:
+  - Too many unique shadow definitions
+  - Harsh or unrealistic shadows
+  - Inappropriate elevation for component type
+- **How to fix**: Use 3-4 elevation levels maximum, ensure shadows are subtle, match elevation to component importance
+
+**10. Loading States** (`--loading-states`)
+- **What it checks**: Presence of loading indicators, skeleton screens, progress feedback
+- **Why it matters**: Users need to know when the system is working
+- **Common failures**:
+  - Missing loading indicators
+  - No feedback for async actions
+  - Disabled states without explanation
+- **How to fix**: Add spinners/skeletons, show progress bars, provide status messages
+
+**11. Responsive Design** (`--responsive`)
+- **What it checks**: Breakpoints, mobile-first approach, flexible layouts
+- **Why it matters**: UI must work on all device sizes
+- **Common failures**:
+  - Fixed widths that don't adapt
+  - Horizontal scrolling on mobile
+  - Missing mobile breakpoints
+- **How to fix**: Use relative units, define mobile/tablet/desktop breakpoints, test on multiple viewports
+
+**12. Focus Indicators** (`--focus`)
+- **What it checks**: Visible, high-contrast focus states on all interactive elements
+- **Why it matters**: Keyboard users need to see where they are
+- **Common failures**:
+  - Removing browser default focus outlines without replacement
+  - Low-contrast focus indicators
+  - Missing focus states on custom components
+- **How to fix**: Define explicit focus styles, use 2px+ outlines, ensure 3:1 contrast with background
+
+**13. Dark Mode Support** (`--dark-mode`)
+- **What it checks**: Proper color inversion, maintained contrast, appropriate semantic colors
+- **Why it matters**: Users expect dark mode, reduces eye strain
+- **Common failures**:
+  - Simple color inversion breaking contrast
+  - Hardcoded light-mode-only colors
+  - Missing dark mode variants for brand colors
+- **How to fix**: Define dark mode palette, test all contrast ratios, use semantic color tokens
+
+### Running Validations
+
+#### Individual Validations
+
+Run specific validators during development:
+
+```bash
+# Check visual hierarchy
+prism validate ./project --hierarchy
+
+# Check touch targets
+prism validate ./project --touch-targets
+
+# Check accessibility
+prism validate ./project --accessibility
+
+# Check color contrast (Phase 2 only)
+prism validate ./project --contrast
+```
+
+#### Comprehensive Audit
+
+Run all applicable validations at once:
+
+```bash
+# Audit command runs all validators for the current phase
+prism audit ./project
+
+# Get JSON output for programmatic use
+prism audit ./project --json
+
+# Audit specific version
+prism audit ./project --version v2
+```
+
+**Phase 1 Audit**: Runs hierarchy, touch-targets, gestalt, accessibility, choice-overload  
+**Phase 2 Audit**: Adds contrast, typography, spacing, elevation, loading-states, responsive, focus, dark-mode
+
+#### Validation During Rendering
+
+PRISM automatically validates when rendering:
+
+```bash
+# Validation runs before rendering
+prism render ./project --version v1
+
+# If validation fails, rendering is blocked
+# Fix issues and re-run
+```
+
+### Interpreting Validation Reports
+
+#### Severity Levels
+
+Validation errors are categorized by severity:
+
+- **🔴 CRITICAL**: Accessibility violations, WCAG failures, completely broken UX
+  - Must fix before approval
+  - Examples: No focus indicators, < 3:1 contrast, < 44px touch targets
+  
+- **🟠 WARNING**: Design principle violations, degraded UX
+  - Should fix before Phase 2
+  - Examples: Weak hierarchy, choice overload, off-scale typography
+  
+- **🟡 INFO**: Style guide violations, minor inconsistencies
+  - Consider fixing for polish
+  - Examples: Off-grid spacing by 1-2px, more than 4 shadow variants
+
+#### Score Interpretation
+
+Each validator returns a 0-100 score:
+
+- **90-100**: Excellent - follows best practices
+- **70-89**: Good - minor issues to address
+- **50-69**: Fair - several problems need attention
+- **0-49**: Poor - significant UX or accessibility issues
+
+**Passing Threshold**: 70+ for all validators
+
+#### Example Validation Output
+
+```json
+{
+  "version": "v1",
+  "phase": "structure",
+  "timestamp": "2024-10-25T20:00:00Z",
+  "validators": [
+    {
+      "name": "visual_hierarchy",
+      "score": 85,
+      "status": "passed",
+      "issues": [
+        {
+          "severity": "warning",
+          "component": "header-title",
+          "message": "Size difference between heading and subheading is small (24px vs 20px)",
+          "recommendation": "Increase to at least 1.5x ratio (24px vs 16px or 30px vs 20px)"
+        }
+      ]
+    },
+    {
+      "name": "touch_targets",
+      "score": 60,
+      "status": "failed",
+      "issues": [
+        {
+          "severity": "critical",
+          "component": "close-icon",
+          "message": "Touch target is 32x32px (requires 44x44px minimum)",
+          "recommendation": "Add padding: 6px to reach 44px total size"
+        },
+        {
+          "severity": "critical",
+          "component": "nav-link-2",
+          "message": "Touch target is 40x38px (requires 44x44px minimum)",
+          "recommendation": "Increase height by 4px, width by 4px"
+        }
+      ]
+    },
+    {
+      "name": "accessibility",
+      "score": 95,
+      "status": "passed",
+      "issues": []
+    }
+  ],
+  "summary": {
+    "total_validators": 5,
+    "passed": 4,
+    "failed": 1,
+    "critical_issues": 2,
+    "warnings": 1,
+    "overall_score": 78
+  }
+}
+```
+
+**How to read this**:
+- Overall score: 78 (passing, but needs work)
+- 1 validator failed (touch_targets at 60)
+- 2 critical issues must be fixed (close-icon, nav-link-2)
+- 1 warning to consider (header-title hierarchy)
+
+### Using Validation in Your Workflow
+
+#### Recommended Workflow
+
+**Phase 1 Iteration**:
+1. Create initial structure (v1.json)
+2. Run `prism validate ./project` (or `prism audit ./project`)
+3. Review issues and scores
+4. Fix critical issues (score < 50 or severity: critical)
+5. Save as v2.json
+6. Re-validate until all validators pass (70+ score)
+7. Get approval and lock Phase 1
+
+**Phase 2 Iteration**:
+1. Apply design tokens (v1.json)
+2. Run `prism audit ./project` (includes Phase 2 validators)
+3. Fix contrast, typography, spacing issues
+4. Save as v2.json
+5. Re-validate until all design validators pass
+6. Get final approval
+
+#### Best Practices
+
+**DO**:
+- ✅ Run validation early and often
+- ✅ Fix critical issues immediately
+- ✅ Validate before requesting approval
+- ✅ Use `--json` output for CI/CD integration
+- ✅ Address warnings before moving to Phase 2
+- ✅ Document validation decisions in history/decisions.json
+
+**DON'T**:
+- ❌ Skip validation to "save time"
+- ❌ Ignore critical accessibility issues
+- ❌ Move to Phase 2 with failing Phase 1 validators
+- ❌ Request approval without running audit
+- ❌ Disable validators without good reason
+
+#### Handling Validation Failures
+
+When a validator fails:
+
+1. **Read the error message carefully**
+   - Identifies the specific component
+   - Explains what's wrong
+   - Provides concrete recommendation
+
+2. **Understand the principle**
+   - Why does this rule exist?
+   - What user problem does it prevent?
+
+3. **Fix the root cause, not the symptom**
+   - Don't just tweak numbers to pass
+   - Understand the design principle and apply it properly
+
+4. **Validate the fix**
+   - Re-run validation
+   - Check the score improved
+   - Ensure no new issues introduced
+
+5. **Document the decision**
+   - Log why the issue occurred
+   - Log how you fixed it
+   - Log any trade-offs made
+
+#### Example: Fixing Touch Target Failure
+
+```json
+// v1.json - FAILED touch_targets (score: 60)
+{
+  "components": [
+    {
+      "id": "close-button",
+      "type": "button",
+      "layout": {
+        "width": 32,
+        "height": 32,
+        "padding": 0
+      }
+    }
+  ]
+}
+```
+
+**Validation Output**:
+```
+❌ touch_targets (score: 60)
+   - close-button: 32x32px (requires 44x44px)
+   - Recommendation: Add 6px padding to reach 44px total
+```
+
+**Fix**:
+```json
+// v2.json - PASSED touch_targets (score: 100)
+{
+  "components": [
+    {
+      "id": "close-button",
+      "type": "button",
+      "layout": {
+        "width": 32,    // Icon size unchanged
+        "height": 32,
+        "padding": 6    // Added padding for touch target
+      }
+    }
+  ]
+}
+```
+
+**Decision Log**:
+```json
+{
+  "id": 5,
+  "version": "v2",
+  "type": "accessibility_fix",
+  "description": "Increased close button touch target to 44x44px",
+  "rationale": "Touch targets < 44px fail WCAG 2.1 AA and iOS HIG. Added 6px padding to icon to reach minimum size.",
+  "validation_improved": ["touch_targets: 60 → 100"]
+}
+```
+
+### Advanced Validation Features
+
+#### Suggestion Command
+
+Beyond pass/fail validation, PRISM can proactively suggest improvements:
+
+```bash
+# Get design improvement suggestions
+prism suggest ./project
+
+# Focus on specific category
+prism suggest ./project --category hierarchy
+prism suggest ./project --category accessibility
+prism suggest ./project --category performance
+```
+
+**Suggestion Categories**:
+- **Hierarchy**: Ways to improve visual clarity and importance signaling
+- **Accessibility**: Proactive a11y enhancements beyond WCAG minimums
+- **Consistency**: Detecting repeated patterns that could use shared components
+- **Performance**: Loading strategies, lazy loading, optimization opportunities
+- **Responsiveness**: Breakpoint recommendations, flexible layout improvements
+- **Micro-interactions**: Suggestions for animations, transitions, feedback
+- **Error Prevention**: Confirming destructive actions, input validation
+
+**Example Suggestions**:
+```json
+{
+  "category": "hierarchy",
+  "suggestions": [
+    {
+      "component": "pricing-cards",
+      "priority": "medium",
+      "suggestion": "Highlight the recommended pricing tier with visual emphasis (border, badge, or subtle background)",
+      "rationale": "Users look for guidance on which option to choose. Highlighting the best-value option reduces decision fatigue.",
+      "implementation": "Add 'recommended: true' flag and apply 'border: 2px solid primary.600' in Phase 2"
+    }
+  ]
+}
+```
+
+#### Comparing Versions with Validation
+
+See how validation scores changed between versions:
+
+```bash
+prism compare ./project --from v1 --to v2 --show-validation
+```
+
+**Output**:
+```
+Version Comparison: v1 → v2
+
+Validation Score Changes:
+  visual_hierarchy:  72 → 88 (+16) ✅
+  touch_targets:     60 → 100 (+40) ✅
+  accessibility:     95 → 95 (no change)
+  choice_overload:   80 → 80 (no change)
+  overall_score:     76 → 91 (+15) ✅
+
+Fixed Issues:
+  ✅ close-button touch target increased to 44px
+  ✅ header-title hierarchy improved (24px → 30px)
+
+Remaining Issues:
+  🟡 nav-menu has 8 items (consider reducing to 7 or categorizing)
+```
+
+### Validation in CI/CD Pipelines
+
+Integrate PRISM validation into your build process:
+
+```yaml
+# .github/workflows/validate-designs.yml
+name: Validate Design Files
+
+on:
+  pull_request:
+    paths:
+      - '**/phase1-structure/**'
+      - '**/phase2-design/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install PRISM
+        run: |
+          curl -L https://github.com/org/prism/releases/latest/download/prism-linux-amd64 -o prism
+          chmod +x prism
+      
+      - name: Run Design Audit
+        run: |
+          ./prism audit ./project --json > audit-results.json
+          
+      - name: Check Validation Scores
+        run: |
+          # Fail if overall score < 70
+          score=$(jq '.summary.overall_score' audit-results.json)
+          if [ $score -lt 70 ]; then
+            echo "❌ Validation score too low: $score (requires 70+)"
+            exit 1
+          fi
+          
+      - name: Check Critical Issues
+        run: |
+          # Fail if any critical issues exist
+          critical=$(jq '.summary.critical_issues' audit-results.json)
+          if [ $critical -gt 0 ]; then
+            echo "❌ $critical critical issues found"
+            exit 1
+          fi
+```
+
+**Benefits**:
+- Catches validation failures before merge
+- Prevents accessibility regressions
+- Enforces design standards automatically
+- Provides PR feedback on design quality
+
+### Summary
+
+**Phase 1 Validation** ensures your structure is usable, accessible, and follows UX principles  
+**Phase 2 Validation** ensures your visual design is polished, consistent, and meets WCAG standards
+
+**Run validation early and often** to catch issues when they're easy to fix. Don't wait until approval time.
+
+**Treat critical issues as blockers** - they represent broken UX or accessibility failures that must be fixed.
+
+**Use suggestions proactively** to elevate your design from "functional" to "excellent".
+
+---
+
 ## Success Criteria
 
 You know you're doing this correctly when:

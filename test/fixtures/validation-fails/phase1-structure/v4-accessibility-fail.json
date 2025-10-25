@@ -1,0 +1,109 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T22:00:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Test fixture designed to fail accessibility validation",
+    "primary_action": "Demonstrate accessibility violations",
+    "user_context": "Testing",
+    "key_interactions": ["submit_form"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 16,
+    "max_width": 1200,
+    "padding": 24
+  },
+  "components": [
+    {
+      "id": "header",
+      "type": "box",
+      "role": "header",
+      "layout": {
+        "display": "flex",
+        "direction": "horizontal",
+        "padding": 16,
+        "background": "#F9FAFB"
+      },
+      "children": [
+        {
+          "id": "heading1",
+          "type": "text",
+          "content": "Main Title",
+          "size": "2xl",
+          "weight": "bold",
+          "color": "#000000",
+          "layout": {}
+        }
+      ]
+    },
+    {
+      "id": "content",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 24,
+        "gap": 16
+      },
+      "children": [
+        {
+          "id": "heading3",
+          "type": "text",
+          "content": "Subsection",
+          "size": "base",
+          "weight": "bold",
+          "color": "#000000",
+          "layout": {}
+        },
+        {
+          "id": "email_input",
+          "type": "input",
+          "layout": {
+            "width": 300,
+            "height": 44,
+            "border": "1px solid #E5E5E5"
+          }
+        },
+        {
+          "id": "password_input",
+          "type": "input",
+          "layout": {
+            "width": 300,
+            "height": 44,
+            "border": "1px solid #E5E5E5"
+          }
+        },
+        {
+          "id": "submit_button",
+          "type": "button",
+          "content": "Submit",
+          "layout": {
+            "width": 120,
+            "height": 44,
+            "background": "#3B82F6"
+          }
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {
+      "max_width": 375
+    },
+    "tablet": {
+      "max_width": 768
+    }
+  },
+  "accessibility": {
+    "heading_structure": true,
+    "label_requirements": true
+  },
+  "validation": {
+    "max_nesting_depth": 4,
+    "touch_targets_min": 44
+  }
+}

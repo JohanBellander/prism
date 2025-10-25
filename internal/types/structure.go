@@ -49,12 +49,27 @@ type Component struct {
 	ID       string           `json:"id"`
 	Type     string           `json:"type"`     // "box", "text", "input", "button", "image"
 	Role     string           `json:"role"`     // "header", "navigation", "content", "footer", etc
+	State    string           `json:"state,omitempty"`    // "loading", "error", "empty", "default"
 	Layout   ComponentLayout  `json:"layout"`
 	Content  string           `json:"content,omitempty"`
 	Size     string           `json:"size,omitempty"`     // "xs", "sm", "base", "lg", "xl", "2xl", "3xl", "4xl"
 	Weight   string           `json:"weight,omitempty"`   // "normal", "bold"
 	Color    string           `json:"color,omitempty"`    // hex color
 	Children []Component      `json:"children,omitempty"`
+	Skeleton *SkeletonConfig  `json:"skeleton,omitempty"` // Skeleton placeholder configuration
+}
+
+// SkeletonConfig defines the skeleton/placeholder structure for loading states
+type SkeletonConfig struct {
+	Elements []SkeletonElement `json:"elements,omitempty"`
+}
+
+// SkeletonElement represents a placeholder element in skeleton screen
+type SkeletonElement struct {
+	Type   string `json:"type"`            // "circle", "text", "rect"
+	Width  string `json:"width,omitempty"` // e.g., "60%" or "120px"
+	Height string `json:"height,omitempty"`
+	Size   int    `json:"size,omitempty"`  // For circles
 }
 
 // ComponentLayout defines layout properties for a component

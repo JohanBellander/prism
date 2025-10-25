@@ -9,7 +9,7 @@ import (
 
 var (
 	// Version information (set during build)
-	version = "dev"
+	version = "v0.1.0"
 	commit  = "none"
 	date    = "unknown"
 )
@@ -42,6 +42,8 @@ func init() {
 	// Add subcommands
 	rootCmd.AddCommand(renderCmd)
 	rootCmd.AddCommand(validateCmd)
+	rootCmd.AddCommand(auditCmd)
+	rootCmd.AddCommand(suggestCmd)
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(showCmd)
 	rootCmd.AddCommand(compareCmd)

@@ -13,13 +13,78 @@ import (
 
 var renderCmd = &cobra.Command{
 	Use:   "render [project-path]",
-	Short: "Render mockup to PNG",
-	Long: `Render a Phase 1 structure JSON file to a visual PNG mockup.
+	Short: "Render design structure to visual mockup (PNG/SVG/PDF)",
+	Long: `Render a Phase 1 structure JSON file to a visual mockup.
+
+Generates black & white wireframe images from JSON structure, allowing instant
+visual feedback without writing HTML/CSS. Perfect for iterative design reviews.
+
+Output Formats:
+  png    Raster image (default, best for sharing)
+  svg    Vector image (scalable, good for web)
+  pdf    Document format (good for presentations)
+
+Viewport Presets:
+  mobile      375px  - Phones (iPhone SE, Galaxy S)
+  tablet      768px  - Tablets (iPad, Android tablets)
+  desktop     1200px - Laptops and desktops (default)
+  wide        1440px - Large monitors
+  ultrawide   1920px - Ultra-wide displays
+
+Flags:
+  -v, --version         Version to render (v1, v2, approved, latest)
+  -o, --output          Output file path (default: auto-generated)
+  -w, --width           Canvas width in pixels (overrides viewport)
+      --height          Canvas height in pixels (0 for auto-calculated)
+  -s, --scale           Scale factor for high-DPI (1x, 2x, 3x)
+      --viewport        Viewport preset (mobile, tablet, desktop, wide, ultrawide)
+  -a, --annotations     Include component IDs and dimensions
+  -g, --grid            Show layout grid overlay
+  -f, --format          Output format (png, svg, pdf)
+      --theme           Color theme (bw, wireframe, blueprint)
+      --all             Render all versions in phase1-structure/
 
 Examples:
+  # Render latest version at default size (1200px desktop)
   prism render ./my-dashboard
-  prism render ./my-dashboard --version v2 --json
-  prism render ./my-dashboard --viewport mobile --annotations`,
+
+  # Render specific version
+  prism render ./my-dashboard --version v2
+
+  # Render for mobile viewport (375px)
+  prism render ./my-dashboard --viewport mobile
+
+  # Render at custom width
+  prism render ./my-dashboard --width 1440
+
+  # Render with annotations and grid overlay
+  prism render ./my-dashboard --annotations --grid
+
+  # Render as SVG for web
+  prism render ./my-dashboard --format svg
+
+  # Render at 2x scale for retina displays
+  prism render ./my-dashboard --scale 2 --output mockup@2x.png
+
+  # Render all versions for comparison
+  prism render ./my-dashboard --all
+
+  # Custom output path
+  prism render ./my-dashboard -o ./mockups/dashboard-v3.png
+
+  # High-resolution PDF for presentation
+  prism render ./my-dashboard --format pdf --scale 2 -o presentation.pdf
+
+Output Naming (when --output not specified):
+  {project-name}-phase1-{version}.{format}
+  Examples: my-dashboard-phase1-v1.png, my-dashboard-phase1-approved.svg
+
+Related Commands:
+  prism validate    Validate before rendering
+  prism audit       Full validation report
+  prism compare     Compare two versions visually
+
+For design process, see: DESIGNPROCESS.md`,
 	Args: cobra.MaximumNArgs(1),
 	RunE: runRender,
 }

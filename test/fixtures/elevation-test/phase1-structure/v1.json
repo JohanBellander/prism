@@ -1,0 +1,100 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-01-20T12:00:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Test elevation/shadow recommendations",
+    "primary_action": "Test elevation",
+    "user_context": "Testing elevation recommendations for various component types",
+    "key_interactions": ["test"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 16,
+    "max_width": 1200,
+    "padding": 24
+  },
+  "components": [
+    {
+      "id": "product-card",
+      "type": "box",
+      "role": "card",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 16,
+        "background": "#FFFFFF",
+        "border": "1px solid #E5E5E5",
+        "gap": 12
+      },
+      "children": [
+        {
+          "id": "product-title",
+          "type": "text",
+          "content": "Product Name",
+          "size": "xl",
+          "weight": "bold",
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "id": "action-buttons",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "horizontal",
+        "gap": 12
+      },
+      "children": [
+        {
+          "id": "submit-btn",
+          "type": "button",
+          "content": "Submit"
+        },
+        {
+          "id": "cancel-btn",
+          "type": "button",
+          "content": "Cancel"
+        }
+      ]
+    },
+    {
+      "id": "confirmation-modal",
+      "type": "box",
+      "role": "modal",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 24,
+        "background": "#FFFFFF",
+        "gap": 16
+      },
+      "children": [
+        {
+          "id": "modal-title",
+          "type": "text",
+          "content": "Confirm Action",
+          "size": "2xl",
+          "weight": "bold",
+          "color": "#000000"
+        }
+      ]
+    },
+    {
+      "id": "dropdown-menu",
+      "type": "box",
+      "role": "dropdown",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 8,
+        "background": "#FFFFFF",
+        "border": "1px solid #E5E5E5"
+      }
+    }
+  ]
+}

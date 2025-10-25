@@ -1,0 +1,79 @@
+{
+  "version": "v1",
+  "phase": "structure",
+  "created_at": "2025-10-25T21:00:00Z",
+  "locked": false,
+  "intent": {
+    "purpose": "Test contrast validation",
+    "primary_action": "View contrast issues",
+    "user_context": "Testing",
+    "key_interactions": ["view"]
+  },
+  "layout": {
+    "type": "stack",
+    "direction": "vertical",
+    "spacing": 16,
+    "max_width": 1200,
+    "padding": 24
+  },
+  "components": [
+    {
+      "id": "container",
+      "type": "box",
+      "role": "content",
+      "layout": {
+        "display": "flex",
+        "direction": "vertical",
+        "padding": 16,
+        "background": "#FFFFFF",
+        "gap": 16
+      },
+      "children": [
+        {
+          "id": "good_text",
+          "type": "text",
+          "content": "This text has good contrast (black on white)",
+          "size": "base",
+          "weight": "normal",
+          "color": "#000000"
+        },
+        {
+          "id": "gray_text",
+          "type": "text",
+          "content": "This text uses allowed gray",
+          "size": "base",
+          "weight": "normal",
+          "color": "#737373"
+        },
+        {
+          "id": "light_gray_text",
+          "type": "text",
+          "content": "This is light gray on white",
+          "size": "base",
+          "weight": "normal",
+          "color": "#E5E5E5"
+        }
+      ]
+    }
+  ],
+  "responsive": {
+    "mobile": {
+      "breakpoint": 375,
+      "changes": {}
+    },
+    "tablet": {
+      "breakpoint": 768,
+      "changes": {}
+    }
+  },
+  "accessibility": {
+    "touch_targets_min": 44,
+    "focus_indicators": "visible",
+    "labels": "explicit",
+    "semantic_structure": true
+  },
+  "validation": {
+    "constraints": ["black_white_only", "no_custom_fonts", "max_nesting_4"],
+    "passed": true
+  }
+}
