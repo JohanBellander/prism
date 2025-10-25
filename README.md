@@ -34,6 +34,12 @@ curl -fsSL https://raw.githubusercontent.com/JohanBellander/prism/master/install
 iwr -useb https://raw.githubusercontent.com/JohanBellander/prism/master/install.ps1 | iex
 ```
 
+**Quick install (Windows Command Prompt):**
+
+```cmd
+curl -fsSL https://raw.githubusercontent.com/JohanBellander/prism/master/install.cmd -o %TEMP%\prism-install.cmd && %TEMP%\prism-install.cmd
+```
+
 **From source:**
 
 Requires Go 1.19 or later:
